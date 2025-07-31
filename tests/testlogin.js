@@ -19,7 +19,7 @@ const chrome = require('selenium-webdriver/chrome');
         await driver.findElement(By.xpath('//button[normalize-space(text())="LOGIN"]')).click();
 
         await driver.wait(until.elementLocated(By.css('nav.navbar')), 10000);
-        console.log('Navbar Terdeteksi');
+        console.log('Berhasil Login');
 
         await driver.takeScreenshot().then(image => {
             require('fs').writeFileSync('screenshot-login.png', image, 'base64');

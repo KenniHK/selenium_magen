@@ -27,16 +27,22 @@ const chrome = require('selenium-webdriver/chrome');
         await driver.switchTo().frame(iframe);
         await driver.findElement(By.xpath('//a[contains(@href, "brand")]')).click();
 
-        const inputSearch = await driver.wait(
-            until.elementLocated(By.css('input.ng-untouched')),
-            10000
+        await driver.findElement(By.xpath('//a[contains(@href, "/edit/1622")]')).click();
+
+        await driver.wait(
+            until.elementLocated(By.css('button[type="submit"]')), 10000
         );
 
-        await inputSearch.sendKeys("Selenium Testing Update")
-        console.log("Berhasil")
-       
+        brand_field = await driver.findElement(By.css('input.ng-untouched'));
+        brand_field.clear();
+        brand_field.sendKeys("Selenium Testing Update");
+
+        await driver.findElement(By.css('button[type="submit"]')).click();
+
+        console.log("Berhasil update data")
+    
         await driver.takeScreenshot().then(image => {
-            require('fs').writeFileSync('screenshot-login.png', image, 'base64');
+            require('fs').writeFileSync('screenshot-ubahData.png', image, 'base64');
         });
 
     } catch (err) {
